@@ -1,1 +1,4 @@
+* linguist-vendored
+client/* linguist-vendored
+build/* linguist-vendored
 static/* linguist-vendored
