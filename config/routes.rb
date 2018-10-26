@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :notes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   ################## GRAPHQL ROUTES - reads only ##################
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   post '/chat', to: 'chats#create'
   delete '/chat/clear' => 'chats#destroy'
   mount ActionCable.server => '/cable'
-  
+
   ################## ~RESTFUL ROUTES - reads and writes ##################
 
   root 'chats#index'

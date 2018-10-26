@@ -7,9 +7,11 @@ import { ConnectedRouter } from 'react-router-redux';
 import history from './history';
 
 import Chatterbox from './containers/Chatterbox';
+import Note from './containers/Note';
 import NavBar from './components/NavBar';
 import { connect } from 'react-redux';
 import Routes from './routes';
+
 
 export class App extends Component {
 
@@ -21,27 +23,23 @@ export class App extends Component {
             <div>
               <NavBar />
               <Switch>
-                <Route exact path="/" component={ Chatterbox } />
-                <Route exact path="/chat" component={ Chatterbox } />
+                <Route exact path="/note" component={ Note }/>
+                <Route exact path="/chat" component={ Chatterbox }/>
               </Switch>
             </div>
           </Router>
         </MuiThemeProvider>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
-  };
-};
-
-/*
-connect() returns a higher order component that listens for redux store changes
-and renders a component with props that are values from the store.
-*/
+    auth: state.auth,
+    chats: state.chats
+  }
+}
 
 const WrapperApp = connect(mapStateToProps)(App);
 

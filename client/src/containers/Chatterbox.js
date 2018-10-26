@@ -9,6 +9,7 @@ import {
 } from '../actions/chatActions'
 import ChatItem from '../components/ChatItem'
 import { connect } from 'react-redux'
+import ActionCable from 'actioncable'
 
 function by_id(current, next) {
   if (current.id > next.id) {
@@ -19,8 +20,6 @@ function by_id(current, next) {
     return 0;
   }
 }
-
-var socket = new WebSocket('ws://localhost:3000/chat')
 
 export class Chatterbox extends Component {
 
@@ -35,26 +34,32 @@ export class Chatterbox extends Component {
   componentDidMount() {
     this.props.getChats()
 
-    var socket = new WebSocket('ws://localhost:3000/cable')
+    // const CableApp = ActionCable.createConsumer(`ws://localhost:3001/cable`)
+    //
+    // this.sub = CableApp.subscriptions.create('ChatsChannel', {
+    //   received: this.submit
+    // })
 
-    socket.onopen = (event) => {
-      this.props.postChat('Connected to' + event.currentTarget.url)
-    }
-
-    socket.onerror = (error) => {
-      alert("WebSocket Error:" + error)
-    }
-
-    socket.onmessage = (event) => {
-      this.props.getChats()
-    }
+    // var socket = new WebSocket('ws://localhost:3000/cable')
+    //
+    // socket.onopen = (event) => {
+    //   this.props.postChat('Connected to' + event.currentTarget.url)
+    // }
+    //
+    // socket.onerror = (error) => {
+    //   alert("WebSocket Error:" + error)
+    // }
+    //
+    // socket.onmessage = (event) => {
+    //   this.props.getChats()
+    // }
   }
-  
+
   componentWillUnmount() {
-    socket.close()
-    socket.onclose = (event) => {
-      alert("Disconnected from WebSocket")
-    }
+    // socket.close()
+    // socket.onclose = (event) => {
+    //   alert("Disconnected from WebSocket")
+    // }
   }
 
   handleChange = (event) => {
@@ -75,7 +80,8 @@ export class Chatterbox extends Component {
     event.stopPropagation()
     event.preventDefault()
     this.props.postChat(this.state.message)
-    socket.send(this.state.message)
+    // this.sub.send({ content: this.state.message, id: 1 })
+    this.props.getChats()
     this.reset()
   }
 

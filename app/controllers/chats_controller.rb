@@ -13,7 +13,6 @@ class ChatsController < ApplicationController
     @chat = Chat.new(chat_params)
     @chat.save unless !@chat.content
     @chats = Chat.all
-    # ActionCable.server.broadcast @chats, head :ok
     render json: @chats, status: 200
   end
 

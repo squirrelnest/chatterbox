@@ -5,6 +5,12 @@ p, h3 {
   color: #212121;
 }
 
+.note {
+  width: 500px;
+  height: 500px;
+  margin: 20px;
+}
+
 td {
   color: #212121;
 }
