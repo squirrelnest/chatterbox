@@ -1,4 +1,6 @@
 * linguist-vendored
-client/* linguist-vendored
-build/* linguist-vendored
-static/* linguist-vendored
+*.js linguist-generated
+client/*/* linguist-vendored=false
+client/* linguist-vendored=false
+
+*.js linguist-language=Ruby

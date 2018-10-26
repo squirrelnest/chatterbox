@@ -8,11 +8,6 @@ import history from './history';
 
 import Chatterbox from './containers/Chatterbox';
 import NavBar from './components/NavBar';
-import MyReviews from './containers/MyReviews';
-import Home from './containers/Home';
-import ShowLocation from './containers/ShowLocation';
-import LoginContainer from './containers/LoginContainer';
-import RegistrationContainer from './containers/RegistrationContainer';
 import { connect } from 'react-redux';
 import Routes from './routes';
 
@@ -26,14 +21,8 @@ export class App extends Component {
             <div>
               <NavBar />
               <Switch>
-                <Route exact path="/" component={ Home } />
-
+                <Route exact path="/" component={ Chatterbox } />
                 <Route exact path="/chat" component={ Chatterbox } />
-
-                <Route path={`/locations/:locationId`} component={ ShowLocation } />
-                <Route exact path="/reviews/myreviews" component={ MyReviews } />} />
-                <Route exact path="/login" component={ LoginContainer } />
-                <Route exact path="/signup" component={ RegistrationContainer } />
               </Switch>
             </div>
           </Router>
@@ -45,8 +34,6 @@ export class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations.locations,
-    reviews: state.reviews.reviews,
     auth: state.auth
   };
 };

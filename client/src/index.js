@@ -7,15 +7,13 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import yomama from './reducers/index';
 import WrapperApp from './App';
-import { fetchLocations } from './actions/thunks';
-import './functions/currentPosition';
 import configureStore from './configureStore';
 
 let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
 // const store = configureStore();
 
-store.dispatch(fetchLocations())
+// store.dispatch(fetchLocations())
 
 /* Provider exposes store so you can pass it through as a prop on context.
    This allows components to subscribe to store updates and dispatch actions */
