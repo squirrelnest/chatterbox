@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import '../css/styles.css'
 import ActionCable from 'actioncable'
+import { API_ROOT } from '../api-config'
+import { API_WS_ROOT } from '../api-config'
 
 export default class Note extends Component {
   state = { text: '' }
 
   componentDidMount() {
-    window.fetch('http://localhost:3001/notes/1').then(data => {
+    window.fetch('/notes/1').then(data => {
       data.json().then(res => {
         this.setState({ text: res.text })
       })
     })
 
-    const cable = ActionCable.createConsumer('ws://localhost:3001/cable')
+    const cable = ActionCable.createConsumer(API_WS_ROOT)
+    // const cable = ActionCable.createConsumer('ws://localhost:3001/cable')
     this.sub = cable.subscriptions.create('NotesChannel', {
       received: this.handleReceiveNewText
     })

@@ -34,11 +34,17 @@ export class Chatterbox extends Component {
   componentDidMount() {
     this.props.getChats()
 
-    // const CableApp = ActionCable.createConsumer(`ws://localhost:3001/cable`)
-    //
-    // this.sub = CableApp.subscriptions.create('ChatsChannel', {
-    //   received: this.submit
-    // })
+    window.fetch('http://localhost:3001/chat').then(data => {
+      data.json().then(res => {
+        this.setState({ chats: res })
+      })
+    })
+
+    const cable = ActionCable.createConsumer('ws://localhost:3001/cable')
+    this.sub = cable.subscriptions.create('ChatsChannel', {
+      received: this.submit
+    })
+
 
     // var socket = new WebSocket('ws://localhost:3000/cable')
     //
@@ -77,11 +83,11 @@ export class Chatterbox extends Component {
   }
 
   submit = (event) => {
-    event.stopPropagation()
-    event.preventDefault()
+    // event.stopPropagation()
+    // event.preventDefault()
     this.props.postChat(this.state.message)
-    // this.sub.send({ content: this.state.message, id: 1 })
-    this.props.getChats()
+    this.sub.send({ content: this.state.message, id: 1 })
+    // this.props.getChats()
     this.reset()
   }
 
@@ -99,7 +105,7 @@ export class Chatterbox extends Component {
 
   render() {
 
-    const chatList = this.props.chats.sort(by_id).map( (chat, index) => {
+    const chatList = this.state.chats.sort(by_id).map( (chat, index) => {
       return ( <ChatItem key={chat.id} idx={chat.id} chat={chat.content} /> )
     })
 

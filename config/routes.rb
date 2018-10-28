@@ -3,14 +3,18 @@ Rails.application.routes.draw do
   resources :notes
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  ################## GRAPHQL ROUTES - reads only ##################
-
-  post '/graphql', to: 'graphql#execute'
+  ################## WEBSOCKET ROUTES ##################
 
   get '/chat', to: 'chats#index'
   post '/chat', to: 'chats#create'
   delete '/chat/clear' => 'chats#destroy'
+
+  # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
+
+  ################## GRAPHQL ROUTES - reads only ##################
+
+  # post '/graphql', to: 'graphql#execute'
 
   ################## ~RESTFUL ROUTES - reads and writes ##################
 

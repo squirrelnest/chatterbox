@@ -12,5 +12,5 @@ class NotesChannel < ApplicationCable::Channel
     note.update!(text: data["text"])
     ActionCable.server.broadcast('notes', data)
   end
-  
+
 end
