@@ -1,5 +1,9 @@
 class ChatsController < ApplicationController
 
+  def hello
+    render 'hello'
+  end
+
   def index
     @chats = Chat.all
     render json: @chats, status: 200

@@ -59,7 +59,7 @@ class NavBar extends Component {
     return (
 
         <AppBar
-          title="Yarrble"
+          title="Chatterbox"
           onTitleClick={this.handleClick}
           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           iconElementRight={this.props.authenticated ? <Logged /> : <Login />}

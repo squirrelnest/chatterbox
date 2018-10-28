@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   ################## WEBSOCKET ROUTES ##################
 
+  get '/hello', to: 'chats#hello'
+
   get '/chat', to: 'chats#index'
   post '/chat', to: 'chats#create'
   delete '/chat/clear' => 'chats#destroy'
