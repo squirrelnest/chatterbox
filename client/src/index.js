@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import yomama from './reducers/index';
 import WrapperApp from './App';
 import configureStore from './configureStore';
+import { getChats } from './actions/chatActions';
 
 
 let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
@@ -15,8 +16,11 @@ let store = createStore(yomama, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__
 
 // store.dispatch(fetchLocations())
 
-/* Provider exposes store so you can pass it through as a prop on context.
-   This allows components to subscribe to store updates and dispatch actions */
+const retrieve = () => {
+  store.dispatch(getChats())
+}
+
+window.setTimeout(retrieve, 2000)
 
 render (
   <Provider store={store}>

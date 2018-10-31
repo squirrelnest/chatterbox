@@ -33,10 +33,10 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   config.action_cable.mount_path = '/cable'
-  # config.action_cable.url = 'ws://169.254.244.132:3000/cable'
+  config.action_cable.url = 'ws://169.254.244.132:3000/cable'
   # config.action_cable.url = 'ws://localhost:3001/cable'
-  config.action_cable.url = 'ws://localhost:3000/cable'
-  config.action_cable.allowed_request_origins = [ /*/, /http:\/\/localhost:*/, /http:\/\/169.254.244.132:*/, /http:\/\/169.254.28.234:*/, 'localhost', '169.254.244.132', '169.254.28.234' ]
+  # config.action_cable.url = 'ws://localhost:3000/cable'
+  # config.action_cable.allowed_request_origins = [ /http:\/\/169.254.244.132:3000/, /http:\/\/localhost:*/, /http:\/\/169.254.244.132:*/, /http:\/\/169.254.28.234:*/, 'localhost', '169.254.244.132', '169.254.28.234' ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

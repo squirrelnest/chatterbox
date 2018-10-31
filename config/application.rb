@@ -41,7 +41,7 @@ module Yarrble
     # config.middleware.use ActionDispatch::Cookies
 
     # Allowed origins as environmental variables
-    # config.x.cors_allowed_origins = ENV['REACT_APP_FRONTEND_HOST_DEVELOPMENT']
+    # config.x.cors_allowed_origins = [ENV['REACT_APP_FRONTEND_HOST_DEVELOPMENT'], 'http://169.254.244.132:3000']
 
   end
 end

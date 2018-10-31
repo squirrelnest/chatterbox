@@ -7,7 +7,6 @@ const hostname = global && global.location && global.location.hostname;
 if (hostname === '169.254.244.132') {
   backendHost = '169.254.244.132:3001'
 } else if (hostname === 'localhost') {
-  // backendHost = 'localhost:3001'
   backendHost = 'localhost:3001' // when using Node
 }
 

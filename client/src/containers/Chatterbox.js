@@ -10,6 +10,7 @@ import {
 import ChatItem from '../components/ChatItem'
 import { connect } from 'react-redux'
 import ActionCable from 'actioncable'
+import { API_ROOT } from '../api-config'
 
 function by_id(current, next) {
   if (current.id > next.id) {
@@ -34,13 +35,13 @@ export class Chatterbox extends Component {
   componentDidMount() {
     this.props.getChats()
 
-    window.fetch('http://localhost:3001/chat').then(data => {
+    window.fetch('http://${API_ROOT}/chat').then(data => {
       data.json().then(res => {
         this.setState({ chats: res })
       })
     })
 
-    const cable = ActionCable.createConsumer('ws://localhost:3001/cable')
+    const cable = ActionCable.createConsumer(`ws://${API_ROOT}/cable`)
     this.sub = cable.subscriptions.create('ChatsChannel', {
       received: this.submit
     })
@@ -61,11 +62,12 @@ export class Chatterbox extends Component {
     // }
   }
 
-  componentWillUnmount() {
-    // socket.close()
-    // socket.onclose = (event) => {
-    //   alert("Disconnected from WebSocket")
-    // }
+  componentWillReceiveProps(prevProps) {
+    if (prevProps != this.props) {
+      this.setState({
+        chats: this.props.chats
+      })
+    }
   }
 
   handleChange = (event) => {
@@ -105,7 +107,7 @@ export class Chatterbox extends Component {
 
   render() {
 
-    const chatList = this.state.chats.sort(by_id).map( (chat, index) => {
+    const chatList = this.props.chats.sort(by_id).map( (chat, index) => {
       return ( <ChatItem key={chat.id} idx={chat.id} chat={chat.content} /> )
     })
 
